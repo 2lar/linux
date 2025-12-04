@@ -1,5 +1,4 @@
 # Commands for everything to learn about / Ubuntu HomeLab
-
 ## 🧠 Basic Terminal / Shell Management
 
 | Command | Purpose |
@@ -19,23 +18,26 @@
 | `sudo apt install samba -y` | Installs the **Samba file sharing service**. |
 | `sudo service smbd restart` | **Restarts the Samba service** (run this after editing `/etc/samba/smb.conf`). |
 | `sudo smbpasswd -a username` | Sets or changes the **network-only password** for the Samba user. |
-| `sudo smbpasswd -e username` | **Enables** the specified user in the Samba database. |
 | `testparm` | Checks the `/etc/samba/smb.conf` file for **syntax errors**. |
 | `tailscale ip -4` | Displays the server's **private 100.x.y.z IP address** on the Tailscale network. |
 | `sudo tailscale up` | **Authenticates/Connects** the server to your Tailscale network. |
 
 ---
 
-## 🐳 Docker Management
+## 🐳 Docker Management & Cleanup
 
 | Command | Purpose |
 | :--- | :--- |
-| `sudo apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin` | Installs the complete **Docker stack** (Engine, CLI, and Compose plugin). |
+| `sudo apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin` | Installs the complete **Docker stack**. |
 | `sudo usermod -aG docker username` | **Grants non-sudo permissions** to run Docker commands (requires logging out/in). |
 | `docker run hello-world` | **Tests the Docker installation** by running a simple container. |
-| `docker ps -a` | Lists **all containers** (running and stopped). |
+| `docker ps -a` | Lists **all containers** (running and stopped/exited). |
+| `docker stop container_name` | **Stops a specific running container** using its name or ID. |
 | `docker stop $(docker ps -aq)` | Stops **all currently running containers**. |
-| `sudo systemctl restart docker` | Restarts the main **Docker service** (use after system updates). |
+| `sudo systemctl restart docker` | Restarts the main **Docker service**. |
+| `docker container prune` | Removes **all stopped/exited containers** (frees up disk space). |
+| `docker image prune -a` | Removes **all unused Docker images** (frees up disk space). |
+| `docker system prune` | **The ultimate cleanup:** Removes stopped containers, unused networks, and dangling images. |
 
 ---
 
@@ -48,5 +50,5 @@
 | `htop` | Opens the **live process/resource monitor** (CPU, RAM usage). |
 | `sudo apt install smartmontools` | Installs the tools to check **HDD/SSD health**. |
 | `sudo smartctl -a /dev/sda` | Checks the **S.M.A.R.T. status** (health) of your main hard drive. |
-| `sudo chown -R user:user /path/to/share` | **Changes ownership** of files/folders recursively (e.g., before sharing files). |
+| `sudo chown -R user:user /path/to/share` | **Changes ownership** of files/folders recursively (before sharing or for cleanup). |
 | `sudo chmod -R 770 /path/to/share` | Sets **read/write permissions** for owner/group (`770`) recursively. |
