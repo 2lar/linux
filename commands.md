@@ -64,3 +64,29 @@
 | `tailscale status` | **Network Check.** Shows other devices connected to your mesh. |
 | `sudo service smbd restart` | **Restart SMB.** Applies changes made to `/etc/samba/smb.conf`. |
 | `htop` | **Task Manager.** Visual process viewer (Ctrl+C to exit). |
+
+---
+
+## 🕵️ Tailscale Exit Node & Security
+*Commands to manage the "Personal VPN" feature.*
+
+| Command | Purpose |
+| :--- | :--- |
+| `sudo tailscale up --advertise-exit-node` | **Enable.** Tells Tailscale "I want to be an exit node." (Requires Admin Console approval). |
+| `sudo tailscale up --advertise-exit-node=false` | **Disable.** Stops acting as an exit node immediately. |
+| `tailscale status` | **Check Peers.** Shows who is connected to you. Look for "active" devices. |
+| `tailscale netcheck` | **Health Check.** Verifies your connection to the encrypted relay servers. |
+| `sudo tailscale logout` | **Kill Switch.** Completely disconnects the server from the Tailscale network. |
+
+### 🚨 How to COMPLETELY Revert Exit Node Settings
+If you want to "factory reset" the network settings we changed:
+
+1. **Turn off the feature:**
+   `sudo tailscale up --advertise-exit-node=false --reset`
+
+2. **Delete the IP Forwarding rule:**
+   `sudo rm /etc/sysctl.d/99-tailscale.conf`
+
+3. **Reload System Networking:**
+   `sudo sysctl -p`
+   *(Or just `sudo reboot` to be sure).*
