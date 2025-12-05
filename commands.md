@@ -77,6 +77,11 @@
 | `tailscale status` | **Check Peers.** Shows who is connected to you. Look for "active" devices. |
 | `tailscale netcheck` | **Health Check.** Verifies your connection to the encrypted relay servers. |
 | `sudo tailscale logout` | **Kill Switch.** Completely disconnects the server from the Tailscale network. |
+| `sudo tailscale serve --bg http://localhost:3000` | **Expose App.** Securely serves a local app (port 3000) to your private Tailscale network with HTTPS. |
+| `tailscale serve status` | **Check URL.** Shows the public HTTPS URL for your served apps. |
+| `sudo tailscale serve --bg --reset` | **Clear.** Removes all served apps/proxies. |
+| `sudo tailscale serve reset` | **⚠️ Cleanup / Stop All.** Completely wipes all "serve" configurations and stops the background proxy. |
+| `sudo tailscale serve --https=443 off` | **Stop Specific.** Stops only the main HTTPS proxy (useful if you have multiple rules). |
 
 ### 🚨 How to COMPLETELY Revert Exit Node Settings
 If you want to "factory reset" the network settings we changed:
